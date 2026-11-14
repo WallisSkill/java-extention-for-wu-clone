@@ -1,0 +1,507 @@
+[
+  {
+    "group": "Quarkus",
+    "when": {
+      "files": [
+        "pom.xml"
+      ],
+      "contains_any": [
+        "quarkus-maven-plugin",
+        "<groupId>io.quarkus"
+      ],
+      "contains_none": [
+        "<packaging>pom</packaging>"
+      ]
+    },
+    "command": {
+      "candidates": [
+        {
+          "path": "$ROOT/mvnw.cmd",
+          "os": "windows"
+        },
+        {
+          "path": "$ROOT/mvnw",
+          "os": "unix"
+        },
+        {
+          "program": "mvn"
+        },
+        {
+          "path": "$EXTENSION_WORK/maven/*/*/bin/mvn.cmd",
+          "os": "windows"
+        },
+        {
+          "path": "$EXTENSION_WORK/maven/*/*/bin/mvn",
+          "os": "unix"
+        }
+      ],
+      "fallback": "mvn"
+    },
+    "tasks": [
+      {
+        "label": "dev",
+        "args": [
+          "quarkus:dev"
+        ],
+        "debug": {
+          "args": [
+            "-Ddebug=5005"
+          ],
+          "adapter": "Java",
+          "port": 5005,
+          "config": {
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005
+          }
+        }
+      },
+      {
+        "label": "test (continuous)",
+        "args": [
+          "quarkus:test"
+        ]
+      },
+      {
+        "label": "build",
+        "args": [
+          "clean",
+          "package"
+        ]
+      },
+      {
+        "label": "build native",
+        "args": [
+          "clean",
+          "package",
+          "-Dnative"
+        ]
+      }
+    ],
+    "env_file": "$EXTENSION_WORK/env/$ROOT_KEY.env",
+    "choices": {
+      "key": "maven-profiles",
+      "label": "Profiles",
+      "block": [
+        "<profile>",
+        "</profile>"
+      ],
+      "value": [
+        "<id>",
+        "</id>"
+      ],
+      "arg_prefix": "-P",
+      "separator": ","
+    }
+  },
+  {
+    "group": "Spring Boot",
+    "when": {
+      "files": [
+        "pom.xml"
+      ],
+      "contains_any": [
+        "spring-boot-maven-plugin"
+      ],
+      "contains_none": [
+        "<packaging>pom</packaging>"
+      ]
+    },
+    "command": {
+      "candidates": [
+        {
+          "path": "$ROOT/mvnw.cmd",
+          "os": "windows"
+        },
+        {
+          "path": "$ROOT/mvnw",
+          "os": "unix"
+        },
+        {
+          "program": "mvn"
+        },
+        {
+          "path": "$EXTENSION_WORK/maven/*/*/bin/mvn.cmd",
+          "os": "windows"
+        },
+        {
+          "path": "$EXTENSION_WORK/maven/*/*/bin/mvn",
+          "os": "unix"
+        }
+      ],
+      "fallback": "mvn"
+    },
+    "tasks": [
+      {
+        "label": "run",
+        "args": [
+          "spring-boot:run"
+        ],
+        "debug": {
+          "args": [
+            "-Dspring-boot.run.jvmArguments=-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005"
+          ],
+          "adapter": "Java",
+          "port": 5005,
+          "config": {
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005
+          }
+        }
+      }
+    ],
+    "env_file": "$EXTENSION_WORK/env/$ROOT_KEY.env",
+    "choices": {
+      "key": "maven-profiles",
+      "label": "Profiles",
+      "block": [
+        "<profile>",
+        "</profile>"
+      ],
+      "value": [
+        "<id>",
+        "</id>"
+      ],
+      "arg_prefix": "-P",
+      "separator": ","
+    }
+  },
+  {
+    "group": "Maven",
+    "when": {
+      "files": [
+        "pom.xml"
+      ]
+    },
+    "command": {
+      "candidates": [
+        {
+          "path": "$ROOT/mvnw.cmd",
+          "os": "windows"
+        },
+        {
+          "path": "$ROOT/mvnw",
+          "os": "unix"
+        },
+        {
+          "program": "mvn"
+        },
+        {
+          "path": "$EXTENSION_WORK/maven/*/*/bin/mvn.cmd",
+          "os": "windows"
+        },
+        {
+          "path": "$EXTENSION_WORK/maven/*/*/bin/mvn",
+          "os": "unix"
+        }
+      ],
+      "fallback": "mvn"
+    },
+    "tasks": [
+      {
+        "label": "clean install",
+        "args": [
+          "clean",
+          "install"
+        ]
+      },
+      {
+        "label": "package",
+        "args": [
+          "package"
+        ]
+      },
+      {
+        "label": "compile",
+        "args": [
+          "compile"
+        ]
+      },
+      {
+        "label": "test",
+        "args": [
+          "test"
+        ],
+        "debug": {
+          "args": [
+            "-Dmaven.surefire.debug"
+          ],
+          "adapter": "Java",
+          "port": 5005,
+          "config": {
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005
+          }
+        }
+      },
+      {
+        "label": "install (skip tests)",
+        "args": [
+          "install",
+          "-DskipTests"
+        ]
+      }
+    ],
+    "env_file": "$EXTENSION_WORK/env/$ROOT_KEY.env",
+    "choices": {
+      "key": "maven-profiles",
+      "label": "Profiles",
+      "block": [
+        "<profile>",
+        "</profile>"
+      ],
+      "value": [
+        "<id>",
+        "</id>"
+      ],
+      "arg_prefix": "-P",
+      "separator": ","
+    }
+  },
+  {
+    "group": "Quarkus",
+    "when": {
+      "files": [
+        "build.gradle.kts",
+        "build.gradle"
+      ],
+      "contains_any": [
+        "io.quarkus"
+      ]
+    },
+    "command": {
+      "candidates": [
+        {
+          "path": "$ROOT/gradlew.bat",
+          "os": "windows"
+        },
+        {
+          "path": "$ROOT/gradlew",
+          "os": "unix"
+        },
+        {
+          "program": "gradle"
+        },
+        {
+          "path": "$EXTENSION_WORK/gradle/*/*/bin/gradle.bat",
+          "os": "windows"
+        },
+        {
+          "path": "$EXTENSION_WORK/gradle/*/*/bin/gradle",
+          "os": "unix"
+        }
+      ],
+      "fallback": "gradle"
+    },
+    "tasks": [
+      {
+        "label": "dev",
+        "args": [
+          "quarkusDev"
+        ],
+        "debug": {
+          "args": [
+            "-Ddebug=5005"
+          ],
+          "adapter": "Java",
+          "port": 5005,
+          "config": {
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005
+          }
+        }
+      },
+      {
+        "label": "build",
+        "args": [
+          "quarkusBuild"
+        ]
+      }
+    ],
+    "env_file": "$EXTENSION_WORK/env/$ROOT_KEY.env"
+  },
+  {
+    "group": "Spring Boot",
+    "when": {
+      "files": [
+        "build.gradle.kts",
+        "build.gradle"
+      ],
+      "contains_any": [
+        "org.springframework.boot"
+      ]
+    },
+    "command": {
+      "candidates": [
+        {
+          "path": "$ROOT/gradlew.bat",
+          "os": "windows"
+        },
+        {
+          "path": "$ROOT/gradlew",
+          "os": "unix"
+        },
+        {
+          "program": "gradle"
+        },
+        {
+          "path": "$EXTENSION_WORK/gradle/*/*/bin/gradle.bat",
+          "os": "windows"
+        },
+        {
+          "path": "$EXTENSION_WORK/gradle/*/*/bin/gradle",
+          "os": "unix"
+        }
+      ],
+      "fallback": "gradle"
+    },
+    "tasks": [
+      {
+        "label": "bootRun",
+        "args": [
+          "bootRun"
+        ],
+        "debug": {
+          "args": [
+            "--debug-jvm"
+          ],
+          "adapter": "Java",
+          "port": 5005,
+          "config": {
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005
+          }
+        }
+      }
+    ],
+    "env_file": "$EXTENSION_WORK/env/$ROOT_KEY.env"
+  },
+  {
+    "group": "Gradle",
+    "when": {
+      "files": [
+        "build.gradle.kts",
+        "build.gradle"
+      ],
+      "contains_any": [
+        "application"
+      ]
+    },
+    "command": {
+      "candidates": [
+        {
+          "path": "$ROOT/gradlew.bat",
+          "os": "windows"
+        },
+        {
+          "path": "$ROOT/gradlew",
+          "os": "unix"
+        },
+        {
+          "program": "gradle"
+        },
+        {
+          "path": "$EXTENSION_WORK/gradle/*/*/bin/gradle.bat",
+          "os": "windows"
+        },
+        {
+          "path": "$EXTENSION_WORK/gradle/*/*/bin/gradle",
+          "os": "unix"
+        }
+      ],
+      "fallback": "gradle"
+    },
+    "tasks": [
+      {
+        "label": "run",
+        "args": [
+          "run"
+        ],
+        "debug": {
+          "args": [
+            "--debug-jvm"
+          ],
+          "adapter": "Java",
+          "port": 5005,
+          "config": {
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005
+          }
+        }
+      }
+    ],
+    "env_file": "$EXTENSION_WORK/env/$ROOT_KEY.env"
+  },
+  {
+    "group": "Gradle",
+    "when": {
+      "files": [
+        "build.gradle.kts",
+        "build.gradle"
+      ]
+    },
+    "command": {
+      "candidates": [
+        {
+          "path": "$ROOT/gradlew.bat",
+          "os": "windows"
+        },
+        {
+          "path": "$ROOT/gradlew",
+          "os": "unix"
+        },
+        {
+          "program": "gradle"
+        },
+        {
+          "path": "$EXTENSION_WORK/gradle/*/*/bin/gradle.bat",
+          "os": "windows"
+        },
+        {
+          "path": "$EXTENSION_WORK/gradle/*/*/bin/gradle",
+          "os": "unix"
+        }
+      ],
+      "fallback": "gradle"
+    },
+    "tasks": [
+      {
+        "label": "build",
+        "args": [
+          "build"
+        ]
+      },
+      {
+        "label": "clean build",
+        "args": [
+          "clean",
+          "build"
+        ]
+      },
+      {
+        "label": "test",
+        "args": [
+          "test"
+        ],
+        "debug": {
+          "args": [
+            "--debug-jvm"
+          ],
+          "adapter": "Java",
+          "port": 5005,
+          "config": {
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005
+          }
+        }
+      }
+    ],
+    "env_file": "$EXTENSION_WORK/env/$ROOT_KEY.env"
+  }
+]

@@ -1,0 +1,23 @@
+id = "java-wis"
+name = "Java (WiSCode)"
+description = "Lightweight Java support for WiSCode: syntax, outline, run buttons for main/JUnit, Eclipse JDT Language Server, and .properties files (Quarkus/Spring)."
+version = "0.1.0"
+schema_version = 1
+authors = ["WiSCode contributors"]
+repository = "https://github.com/dstrml/wu"
+
+[language_servers.jdtls]
+name = "Eclipse JDT Language Server"
+languages = ["Java"]
+
+[grammars.java]
+repository = "https://github.com/tree-sitter/tree-sitter-java"
+commit = "94703d5a6bed02b98e438d7cad1136c01a60ba2c"
+
+[grammars.properties]
+repository = "https://github.com/tree-sitter-grammars/tree-sitter-properties"
+commit = "579b62f5ad8d96c2bb331f07d1408c92767531d9"
+
+[debug_adapters.Java]
+
+[debug_locators.java-wis]

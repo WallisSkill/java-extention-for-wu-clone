@@ -1,0 +1,55 @@
+[
+  {
+    "label": "${ZED_CUSTOM_java_class_name}",
+    "command": "echo",
+    "args": [
+      "Use Run or Debug in the gutter menu to start ${ZED_CUSTOM_java_class_name}"
+    ],
+    "env": {
+      "JAVA_WIS_MAIN_CLASS": "${ZED_CUSTOM_java_package_name}.${ZED_CUSTOM_java_class_name}"
+    },
+    "tags": [
+      "java-main",
+      "debug-only"
+    ]
+  },
+  {
+    "label": "Test ${ZED_CUSTOM_java_class_name}#${ZED_CUSTOM_java_method_name} (Maven)",
+    "command": "mvn",
+    "args": [
+      "test",
+      "-Dsurefire.failIfNoSpecifiedTests=false",
+      "-Dtest=${ZED_CUSTOM_java_class_name}#${ZED_CUSTOM_java_method_name}"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "tags": [
+      "java-test-method"
+    ]
+  },
+  {
+    "label": "Test ${ZED_CUSTOM_java_class_name} (Maven)",
+    "command": "mvn",
+    "args": [
+      "test",
+      "-Dsurefire.failIfNoSpecifiedTests=false",
+      "-Dtest=${ZED_CUSTOM_java_class_name}"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "tags": [
+      "java-test-method"
+    ]
+  },
+  {
+    "label": "Test ${ZED_CUSTOM_java_class_name}#${ZED_CUSTOM_java_method_name} (Gradle)",
+    "command": "gradle",
+    "args": [
+      "test",
+      "--tests",
+      "${ZED_CUSTOM_java_package_name}.${ZED_CUSTOM_java_class_name}.${ZED_CUSTOM_java_method_name}"
+    ],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "tags": [
+      "java-test-method"
+    ]
+  }
+]
